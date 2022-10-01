@@ -13,7 +13,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     steps:
         - uses: actions/checkout@v3
         - run: docker-compose -f docker-compose-build.yaml build --parallel
@@ -21,7 +21,7 @@ jobs:
         - run: docker tag udagram-api-user nyakamwe/udagram-api-user:v1
         - run: docker tag udagram-api-feed nyakamwe/udagram-api-feed:v1
         - run: docker tag reverseproxy nyakamwe/reverseproxy:v1
-        - run: echo ${{secrets.DOCKER_PASSWORD}}" | docker login -u "${{secrets.DOCKER_USERNAME}}" --password-stdin
+        - run: echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u "${{secrets.DOCKER_USERNAME}}" --password-stdin
         - run: docker push nyakamwe/udagram-frontend:v1
         - run: docker push nyakamwe/udagram-api-user:v1
         - run: docker push nyakamwe/udagram-api-feed:v1
